@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import AdvantagesSection from '@/components/AdvantagesSection.vue'
+import HeroSection from '@/components/HeroSection.vue'
+import ServicesSection from '@/components/ServicesSection.vue';
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <HeroSection />
+    <AdvantagesSection />
+    <ServicesSection />
+
   </main>
 </template>

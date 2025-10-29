@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Eduarda",
+    "rating": 5,
+    "text": "Ótimos atendimento e serviço de qualidade! Melhor design gráfico de svp!",
+    "source": "Google"
+  },
+  {
+    "name": "Silvana Ramos",
+    "rating": 5,
+    "text": "Ótimo profissional e material de qualidade.",
+    "source": "Google"
+  },
+  {
+    "name": "Édipo Saraiva",
+    "rating": 5,
+    "text": "Atencioso com os clientes",
+    "source": "Google"
+  },
+  {
+    "name": "LLEGÓ LA HORA",
+    "rating": 5,
+    "text": "Excelente",
+    "source": "Google"
+  },
+  {
+    "name": "Lucas Pereira",
+    "rating": 5,
+    "text": "A equipe é super atenciosa e o trabalho fala por si. Nota 10!",
+    "source": "Google"
+  }
+]

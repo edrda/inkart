@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import AboutSection from '@/components/AboutSection.vue'
 import AdvantagesSection from '@/components/AdvantagesSection.vue'
+import ContactSection from '@/components/ContactSection.vue'
+import GallerySection from '@/components/GallerySection.vue'
 import HeroSection from '@/components/HeroSection.vue'
-import ServicesSection from '@/components/ServicesSection.vue';
+import ServicesSection from '@/components/ServicesSection.vue'
 </script>
 
 <template>
@@ -9,6 +12,8 @@ import ServicesSection from '@/components/ServicesSection.vue';
     <HeroSection />
     <AdvantagesSection />
     <ServicesSection />
-
+    <AboutSection />
+    <GallerySection />
+    <ContactSection />
   </main>
 </template>

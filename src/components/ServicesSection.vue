@@ -106,10 +106,10 @@ onBeforeUnmount(() => stopAutoplay())
       <div class="content-right">
         <h2 class="main-title">
           <span class="title-primary">Seus Projetos,</span><br />
-          <span class="title-secondary">Nossa Expertise.</span>
+          <span class="title-secondary">Nossa <span class="highlight">Expertise</span>.</span>
         </h2>
 
-        <div>
+        <div class="text">
           <p class="text-description">
             Oferecemos um leque completo de serviços de
             <span>design gráfico e comunicação visual</span>.
@@ -130,7 +130,7 @@ onBeforeUnmount(() => stopAutoplay())
 <style scoped>
 .services-section {
   background: var(--color-light);
-  padding: 6rem 1rem;
+  padding: 10rem 1rem;
 }
 
 .container-grid {
@@ -255,6 +255,16 @@ onBeforeUnmount(() => stopAutoplay())
   color: var(--dark-blue);
 }
 
+.title-secondary .highlight {
+  background: var(--gradient-fresh);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text {
+  max-width: 90%;
+}
+
 .text-description {
   color: var(--color-text);
   font-size: 24px;
@@ -273,8 +283,9 @@ onBeforeUnmount(() => stopAutoplay())
 
 /* === BOTÃO CTA === */
 .cta-button {
-  background: var(--color-green);
-  color: var(--color-text);
+  background: var(--gradient-fresh);
+  color: var(--color-white);
+  text-shadow: 1px;
   padding: 0.9rem 1.75rem;
   border-radius: 50px;
   font-weight: 700;
@@ -287,7 +298,6 @@ onBeforeUnmount(() => stopAutoplay())
 }
 
 .cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 </style>

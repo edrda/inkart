@@ -69,6 +69,7 @@ const advantages: Advantage[] = [
   width: 273px;
   height: 197px;
   background: linear-gradient(122.77deg, #2c4bff 30.37%, #0489b6 87.79%);
+  border: 2px solid #ffffffcd;
   border-radius: 20px;
   text-align: center;
   padding: 2rem 1rem;
@@ -80,7 +81,7 @@ const advantages: Advantage[] = [
 }
 
 .advantage-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-20px);
   filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
 }
 

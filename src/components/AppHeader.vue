@@ -28,8 +28,8 @@ onUnmounted(() => {
       <div class="menu-wrapper">
         <ul class="menu">
           <li><RouterLink to="#vantagens">Vantagens</RouterLink></li>
-          <li><RouterLink to="#servicos">Serviços</RouterLink></li>
-          <li><RouterLink to="#sobre">Sobre</RouterLink></li>
+          <li><RouterLink to="#servicos">Nossos Serviços</RouterLink></li>
+          <li><RouterLink to="#sobre">Sobre a Ink</RouterLink></li>
           <li><RouterLink to="#galeria">Galeria</RouterLink></li>
         </ul>
         <a href="#contato" class="cta">Orçamento</a>
@@ -121,8 +121,8 @@ nav {
 }
 
 .cta {
-  background: var(--color-green);
-  color: var(--color-text);
+  background: var(--gradient-fresh);
+  color: var(--color-white);
   font-size: 18px;
   font-weight: 700;
   padding: 0.6rem 1.2rem;

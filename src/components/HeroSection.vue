@@ -15,11 +15,11 @@ import heroImg from '../assets/images/hero-img.png'
         </p>
 
         <div class="hero-actions">
-        <a href="#contato" class="btn primary">Solicite um orçamento</a>
-        <a href="#servicos" class="btn secondary">
+          <a href="#contato" class="btn primary">Solicite um orçamento</a>
+          <a href="#servicos" class="btn secondary">
             Conheça nossos serviços
             <img src="/src/assets/icons/arrow-down.svg" alt="Icone de seta para baixo" width="14" />
-        </a>
+          </a>
         </div>
       </div>
 
@@ -89,7 +89,7 @@ import heroImg from '../assets/images/hero-img.png'
 }
 
 .btn.primary {
-  background: var(--color-green);
+  background: var(--gradient-fresh);
   color: var(--color-text);
 }
 

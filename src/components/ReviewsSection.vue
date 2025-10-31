@@ -2,7 +2,6 @@
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import reviewsData from '@/data/reviews.json'
 
-// média das avaliações
 const averageRating = (
   reviewsData.reduce((acc, r) => acc + r.rating, 0) / reviewsData.length
 ).toFixed(1)
@@ -25,8 +24,8 @@ const goToNext = async () => {
   const track = trackRef.value
   if (!track) return
 
-  const cardHeight = 140
-  const gap = 20
+  const cardHeight = 100
+  const gap = 10
   const step = cardHeight + gap
 
   track.style.transition = 'transform 1.2s ease-in-out'
@@ -35,7 +34,7 @@ const goToNext = async () => {
   if (activeIndex.value === total + 1) {
     await new Promise((resolve) => setTimeout(resolve, 1000))
     track.style.transition = 'none'
-    activeIndex.value = 1
+    activeIndex.value = 2
     track.style.transform = `translateY(-${step}px)`
   }
 
@@ -211,6 +210,26 @@ const partners = [
   display: flex;
   justify-content: center;
 }
+
+/* .carousel-wrapper::after,
+.carousel-wrapper::before{
+  content: "";
+    position: absolute;
+    left: 0;
+    width: 340px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+.carousel-wrapper::before{
+  bottom: 0;
+  background: linear-gradient(to top, #2eb69c 0%, transparent 100%);
+}
+
+.carousel-wrapper::after {
+  top: 0;
+  background: linear-gradient(to bottom, transparent 0%, #2eb69c 100%);
+} */
 .carousel-track-vertical {
   display: flex;
   flex-direction: column;
@@ -220,7 +239,7 @@ const partners = [
 
 .review-card {
   width: 340px;
-  height: 140px;
+  min-height: 140px;
   background: #fff;
   border-radius: 14px;
   padding: 1.4rem;

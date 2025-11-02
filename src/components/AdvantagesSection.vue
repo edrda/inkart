@@ -32,7 +32,7 @@ const advantages: Advantage[] = [
 </script>
 
 <template>
-  <section id="#vantagens" class="advantages">
+  <section class="advantages">
     <div class="container advantages-container">
       <div v-for="(item, index) in advantages" :key="index" class="advantage-card">
         <div class="icon-circle">
@@ -49,7 +49,7 @@ const advantages: Advantage[] = [
 .advantages {
   position: relative;
   margin-top: -6rem;
-  z-index: 10;
+  z-index: 2;
   display: flex;
   justify-content: center;
 }

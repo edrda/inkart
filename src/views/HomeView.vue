@@ -4,7 +4,8 @@ import AdvantagesSection from '@/components/AdvantagesSection.vue'
 import ContactSection from '@/components/ContactSection.vue'
 import GallerySection from '@/components/GallerySection.vue'
 import HeroSection from '@/components/HeroSection.vue'
-import ReviewsSection from '@/components/ReviewsSection.vue'
+import ReviewsAndPartnersWrapper from '@/components/ReviewsAndPartnersWrapper.vue'
+// import ReviewsSection from '@/components/ReviewsSection.vue'
 import ServicesSection from '@/components/ServicesSection.vue'
 </script>
 
@@ -15,7 +16,7 @@ import ServicesSection from '@/components/ServicesSection.vue'
     <ServicesSection />
     <AboutSection />
     <GallerySection />
-    <ReviewsSection />
+    <ReviewsAndPartnersWrapper />
     <ContactSection />
   </main>
 </template>

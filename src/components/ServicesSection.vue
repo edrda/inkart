@@ -121,7 +121,7 @@ onBeforeUnmount(() => stopAutoplay())
           </p>
         </div>
 
-        <a href="#contato" class="cta-button"> Quero um Orçamento Sem Compromisso </a>
+        <a href="#contato" class="cta-button"> Quero um orçamento sem compromisso </a>
       </div>
     </div>
   </section>
@@ -285,7 +285,6 @@ onBeforeUnmount(() => stopAutoplay())
 .cta-button {
   background: var(--gradient-fresh);
   color: var(--color-white);
-  text-shadow: 1px;
   padding: 0.9rem 1.75rem;
   border-radius: 50px;
   font-weight: 700;
@@ -299,5 +298,28 @@ onBeforeUnmount(() => stopAutoplay())
 
 .cta-button:hover {
   transform: scale(1.05);
+}
+
+@media (max-width: 960px) {
+  .services-section {
+    padding: 90px 10px;
+  }
+
+  .content-right {
+    padding: 0 20px;
+  }
+
+  .text-description {
+    font-size: 20px;
+    line-height: 25px;
+  }
+
+  .cta-button {
+    font-size: 16px;
+    padding: 0.9rem 10px;
+    min-width: 340px;
+    text-align: center;
+    margin-left: 10px;
+  }
 }
 </style>

@@ -14,25 +14,28 @@ import projeto5 from '@/assets/images/projeto5.jpg'
 
 const galleryImages = [projeto1, projeto2, projeto3, projeto4, projeto5]
 
-// Criamos slides duplicados (loop visual)
-const duplicatedImages = [...galleryImages, ...galleryImages]
-
-const activeIndex = ref(0)
-const intervalTime = 4000
+const duplicatedImages = [...galleryImages, ...galleryImages, ...galleryImages]
+const activeIndex = ref(galleryImages.length)
+const intervalTime = 2000
 let intervalId: number | undefined
 const carouselTrack = ref<HTMLElement | null>(null)
 
+let resetTimeoutId: number | undefined
+
 const goToNext = () => {
+  if (resetTimeoutId) clearTimeout(resetTimeoutId)
   activeIndex.value++
   updatePosition()
 }
 
 const goToPrev = () => {
+  if (resetTimeoutId) clearTimeout(resetTimeoutId)
   activeIndex.value--
   updatePosition()
 }
 
 const startAutoplay = () => {
+  stopAutoplay()
   intervalId = window.setInterval(goToNext, intervalTime)
 }
 const stopAutoplay = () => {
@@ -40,33 +43,64 @@ const stopAutoplay = () => {
 }
 
 onMounted(() => {
+  nextTick(() => updatePosition(false))
   startAutoplay()
-  nextTick(() => updatePosition())
 })
-onBeforeUnmount(() => stopAutoplay())
+onBeforeUnmount(() => {
+  stopAutoplay()
+  if (resetTimeoutId) clearTimeout(resetTimeoutId)
+})
 
-// Atualiza o deslocamento para manter o item ativo no centro
-const updatePosition = () => {
+/**
+ * @param {boolean} useTransition
+ */
+const updatePosition = (useTransition = true) => {
   if (!carouselTrack.value) return
 
-  const slides = carouselTrack.value.children
-  const slideWidth = (slides[0] as HTMLElement)?.offsetWidth || 320
-  const gap = 24
-  const containerWidth = carouselTrack.value.parentElement?.clientWidth || 0
-  const totalSlides = duplicatedImages.length
+  const totalOriginal = galleryImages.length
+  const slideElements = carouselTrack.value.children
+  const firstSlide = slideElements[0] as HTMLElement
 
-  // Loop infinito visual (volta para o meio)
-  if (activeIndex.value >= totalSlides / 2 + galleryImages.length) {
-    activeIndex.value = galleryImages.length
+  const slideWidth = firstSlide?.offsetWidth || 320
+  const gap = 24
+  const itemFullWidth = slideWidth + gap
+
+  carouselTrack.value.style.transition = useTransition ? 'transform 0.7s ease-in-out' : 'none'
+
+  if (activeIndex.value >= totalOriginal * 2) {
     carouselTrack.value.style.transition = 'none'
-  } else if (activeIndex.value <= 0) {
-    activeIndex.value = galleryImages.length
-    carouselTrack.value.style.transition = 'none'
-  } else {
-    carouselTrack.value.style.transition = 'transform 0.7s ease-in-out'
+
+    const offset = -(
+      totalOriginal * itemFullWidth -
+      (carouselTrack.value.parentElement?.clientWidth || 0 - slideWidth) / 2
+    )
+    carouselTrack.value.style.transform = `translateX(${offset}px)`
+
+    resetTimeoutId = window.setTimeout(() => {
+      activeIndex.value = totalOriginal
+      updatePosition(true)
+    }, 50)
+    return
   }
 
-  const offset = -(activeIndex.value * (slideWidth + gap) - (containerWidth - slideWidth) / 2)
+  if (activeIndex.value < totalOriginal) {
+    carouselTrack.value.style.transition = 'none'
+
+    const offset = -(
+      (totalOriginal * 2 - 1) * itemFullWidth -
+      (carouselTrack.value.parentElement?.clientWidth || 0 - slideWidth) / 2
+    )
+    carouselTrack.value.style.transform = `translateX(${offset}px)`
+
+    resetTimeoutId = window.setTimeout(() => {
+      activeIndex.value = totalOriginal * 2 - 1
+      updatePosition(true)
+    }, 50)
+    return
+  }
+
+  const containerWidth = carouselTrack.value.parentElement?.clientWidth || 0
+  const offset = -(activeIndex.value * itemFullWidth - (containerWidth - slideWidth) / 2)
   carouselTrack.value.style.transform = `translateX(${offset}px)`
 }
 </script>
@@ -243,6 +277,13 @@ const updatePosition = () => {
   }
   .carousel-item img {
     height: 260px;
+  }
+
+  .nav-button.left {
+    left: -40px;
+  }
+  .nav-button.right {
+    right: -40px;
   }
 }
 

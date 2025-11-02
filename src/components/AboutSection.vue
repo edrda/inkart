@@ -97,4 +97,24 @@ import teamImage from '@/assets/images/inkart-team.png'
   color: var(--color-yellow);
   font-weight: 600;
 }
+
+@media (max-width: 960px) {
+  .about-section {
+    padding: 1rem;
+  }
+
+  .about-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .about-content h2 {
+    line-height: 34px;
+  }
+
+  .about-content p {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+}
 </style>

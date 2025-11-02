@@ -1,174 +1,77 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import reviewsData from '@/data/reviews.json'
 
-// média das avaliações
 const averageRating = (
   reviewsData.reduce((acc, r) => acc + r.rating, 0) / reviewsData.length
 ).toFixed(1)
 
-// estado e configuração
-const activeIndex = ref(1)
-const intervalTime = 3000
-let intervalId: number | undefined
-
-const trackRef = ref<HTMLElement | null>(null)
-let isTransitioning = false
-
-// mover próximo com loop suave
-const goToNext = async () => {
-  if (isTransitioning) return
-  isTransitioning = true
-  activeIndex.value++
-
-  const total = reviewsData.length
-  const track = trackRef.value
-  if (!track) return
-
-  const cardHeight = 140
-  const gap = 20
-  const step = cardHeight + gap
-
-  track.style.transition = 'transform 1.2s ease-in-out'
-  track.style.transform = `translateY(-${activeIndex.value * step}px)`
-
-  if (activeIndex.value === total + 1) {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    track.style.transition = 'none'
-    activeIndex.value = 1
-    track.style.transform = `translateY(-${step}px)`
+const getStarIcons = (rating: number) => {
+  const stars = []
+  for (let i = 1; i <= 5; i++) {
+    stars.push(i <= rating ? '/src/assets/icons/star.svg' : '/src/assets/icons/outline-star.svg')
   }
-
-  await nextTick()
-  isTransitioning = false
+  return stars
 }
-
-// autoplay
-const startAutoplay = () => {
-  intervalId = window.setInterval(goToNext, intervalTime)
-}
-const stopAutoplay = () => {
-  if (intervalId) clearInterval(intervalId)
-}
-
-onMounted(startAutoplay)
-onBeforeUnmount(stopAutoplay)
-
-// parceiros
-const partners = [
-  'agrosilveira',
-  'barcia',
-  'duminelli',
-  'emporio',
-  'floripa',
-  'mauricio',
-  'mecanica',
-  'odair',
-  'pensecar',
-  'streetmotos',
-  'VAparabrisas',
-  'visual-plotter',
-]
 </script>
 
 <template>
-  <div class="reviews-wrapper">
-    <section id="reviews" class="reviews-section">
-      <div class="reviews-container">
-        <div class="text-wrapper">
-          <h2 class="reviews-title">O que nossos clientes falam sobre a <span>Ink Art</span></h2>
+  <section id="avaliacoes" class="reviews-section">
+    <div class="reviews-container">
+      <h2 class="reviews-title">O que nossos clientes falam sobre a <span>Ink Art</span></h2>
 
-          <div class="rating-summary">
-            <span class="stars">⭐ {{ averageRating }}/5</span>
-            <span class="total">({{ reviewsData.length }} avaliações)</span>
+      <div class="rating-summary">
+        <span class="stars">
+          <img src="/src/assets/icons/star.svg" alt="star" class="star-icon" />
+          {{ averageRating }}/5
+        </span>
+        <span class="total">({{ reviewsData.length }} avaliações)</span>
+      </div>
+
+      <div class="reviews-grid">
+        <div v-for="(review, index) in reviewsData.slice(0, 6)" :key="index" class="review-card">
+          <div class="review-stars">
+            <img
+              v-for="(star, i) in getStarIcons(review.rating)"
+              :key="i"
+              :src="star"
+              alt="star"
+              class="star-icon"
+            />
           </div>
 
-          <a href="#contato" class="cta-button">Quero orçar o meu projeto</a>
-        </div>
+          <p class="review-text">“{{ review.text }}”</p>
 
-        <!-- === CARROSSEL === -->
-        <div class="carousel-wrapper" @mouseenter="stopAutoplay" @mouseleave="startAutoplay">
-          <div class="carousel-vertical">
-            <div ref="trackRef" class="carousel-track-vertical">
-              <div
-                v-for="(review, index) in [
-                  reviewsData[reviewsData.length - 1],
-                  ...reviewsData,
-                  reviewsData[0],
-                ]"
-                :key="index"
-                class="review-card"
-                :class="{
-                  prev: index === activeIndex - 1,
-                  active: index === activeIndex,
-                  next: index === activeIndex + 1,
-                }"
-              >
-                <p class="review-text">“{{ review.text }}”</p>
-                <div class="review-author">
-                  <span class="author-name">{{ review.name }}</span>
-                  <span class="author-rating">★ {{ review.rating }}</span>
-                </div>
-              </div>
-            </div>
+          <div class="review-author">
+            <span class="author-name">{{ review.name }}</span>
+            <span class="author-source">{{ review.source }}</span>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- === PARCEIROS === -->
-    <section id="partners" class="partners-section">
-      <h2>Parceiros e marcas que confiaram na Ink Art</h2>
-      <div class="partners-slider">
-        <div class="logos-track">
-          <div v-for="(partner, i) in [...partners, ...partners]" :key="i" class="partner-logo">
-            <img :src="`/src/assets/images/partners/${partner}.png`" :alt="partner" />
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+      <a href="#contato" class="cta-button" id="parceiros">Quero orçar o meu projeto</a>
+    </div>
+  </section>
 </template>
 
 <style scoped>
-.reviews-wrapper {
-  background: linear-gradient(78deg, #2c4bff 33.72%, #2eb69c 59.56%);
-  border-radius: 20px 80px;
-  padding: 6rem 0 2rem;
-}
-
 .reviews-section {
   padding: 6rem 1rem;
-  overflow: hidden;
   display: flex;
   justify-content: center;
 }
 
 .reviews-container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
-}
-@media (min-width: 1024px) {
-  .reviews-container {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
+  text-align: center;
 }
 
-.text-wrapper {
-  text-align: center;
-  flex: 0 0 35%;
-}
 .reviews-title {
-  font-size: 30px;
+  font-size: 2rem;
   font-weight: 700;
   color: #fff;
   margin-bottom: 1rem;
+  line-height: 1.2;
 }
 .reviews-title span {
   color: var(--color-yellow);
@@ -177,130 +80,112 @@ const partners = [
 .rating-summary {
   color: #fff;
   font-size: 1.1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
+/* === GRID === */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .reviews-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* === CARD === */
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 2rem 1.8rem;
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+  text-align: left;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* === ESTRELAS === */
+.review-stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 0.5rem;
+}
+.star-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* === TEXTO === */
+.review-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #f3f3f3;
+  min-height: 70px;
+}
+
+/* === AUTOR === */
+.review-author {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.author-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+}
+.author-source {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* === CTA === */
 .cta-button {
   background: var(--color-yellow);
   color: var(--color-text);
-  font-weight: 700;
-  padding: 0.9rem 2rem;
+  padding: 0.9rem 1.75rem;
   border-radius: 50px;
+  font-weight: 700;
   font-size: 1rem;
   text-decoration: none;
-  transition: transform 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  display: inline-block;
 }
+
 .cta-button:hover {
   transform: scale(1.05);
 }
 
-/* === CARROSSEL VERTICAL === */
-.carousel-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 480px;
-  overflow: hidden;
-  max-width: 400px;
-}
-.carousel-vertical {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-}
-.carousel-track-vertical {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.review-card {
-  width: 340px;
-  height: 140px;
-  background: #fff;
-  border-radius: 14px;
-  padding: 1.4rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-  color: #333;
-  opacity: 0.2;
-  transform: scale(0.85) translateX(30px);
-  transition: all 0.9s cubic-bezier(0.7, 0, 0.3, 1);
-}
-
-.review-card.prev,
-.review-card.next {
-  opacity: 0.6;
-  transform: scale(0.95) translateX(15px);
-}
-
-.review-card.active {
-  opacity: 1;
-  transform: scale(1.05) translateX(0);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-  z-index: 10;
-}
-
-.review-text {
-  font-size: 1rem;
-  line-height: 1.5;
-  margin-bottom: 1rem;
-}
-.review-author {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 600;
-  color: var(--color-blue);
-}
-
-/* === PARCEIROS === */
-.partners-section {
-  padding: 2.5rem 0;
-  overflow: hidden;
-  text-align: center;
-}
-.partners-section h2 {
-  color: #fff;
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-}
-.partners-slider {
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-  padding: 1rem 0;
-}
-.logos-track {
-  display: flex;
-  align-items: center;
-  gap: 60px;
-  animation: scroll 22s linear infinite;
-}
-.partner-logo img {
-  width: 120px;
-  height: auto;
-  filter: grayscale();
-  opacity: 0.9;
-  transition:
-    transform 0.3s ease,
-    opacity 0.3s ease;
-}
-.partner-logo img:hover {
-  transform: scale(1.1);
-  opacity: 1;
-  filter: none;
-}
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
+@media (max-width: 600px) {
+  .reviews-section {
+    padding: 2rem 1rem;
   }
 }
 </style>

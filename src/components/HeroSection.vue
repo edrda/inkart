@@ -3,7 +3,7 @@ import heroImg from '../assets/images/hero-img.png'
 </script>
 
 <template>
-  <section class="hero">
+  <section id="hero" class="hero">
     <div class="container hero-container">
       <div class="hero-text">
         <h1>
@@ -14,7 +14,7 @@ import heroImg from '../assets/images/hero-img.png'
           Design que conecta, imprime e transforma. Somos seus parceiros em toda estratégia visual.
         </p>
 
-        <div class="hero-actions">
+        <div id="vantagens" class="hero-actions">
           <a href="#contato" class="btn primary">Solicite um orçamento</a>
           <a href="#servicos" class="btn secondary">
             Conheça nossos serviços
@@ -128,6 +128,12 @@ import heroImg from '../assets/images/hero-img.png'
   .hero-container {
     flex-direction: column;
     text-align: center;
+    padding: 0;
+  }
+
+  .hero-text h1 {
+    font-size: 38px;
+    line-height: 42px;
   }
 
   .hero-text p {
@@ -135,7 +141,14 @@ import heroImg from '../assets/images/hero-img.png'
   }
 
   .hero-image img {
-    max-width: 320px;
+    max-width: 340px;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .btn.secondary {
+    min-width: 300px;
   }
 }
 </style>

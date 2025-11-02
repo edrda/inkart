@@ -27,6 +27,12 @@
     "name": "Lucas Pereira",
     "rating": 5,
     "text": "A equipe é super atenciosa e o trabalho fala por si. Nota 10!",
+    "source": "Instagram"
+  },
+  {
+    "name": "Ingrid",
+    "rating": 5,
+    "text": "Recomendo.",
     "source": "Google"
   }
 ]

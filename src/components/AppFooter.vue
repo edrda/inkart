@@ -2,7 +2,11 @@
 
 <template>
   <footer>
-    <span>©  2025. InkArt. Todos os direitos reservados.</span>
+    <span>© 2025. InkArt. Todos os direitos reservados.</span>
+    <div class="info">
+      <span>Rua Mário Teixeira de Melo, 759 - Santa Vitória do Palmar</span>
+      <span class="phone">Telefone/Whatsapp: (53) 99972-2323</span>
+    </div>
     <a
       id="whatsapp-button"
       class="whatsapp-button"
@@ -18,14 +22,26 @@
 <style scoped>
 footer {
   background: var(--color-blue);
-  color: var(--color-white);
+  color: var(--bg-light);
   font-size: 18px;
   text-align: center;
-  height: 70px;
+  height: 80px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 80px 80px 0 0;
+}
+.info {
+  font-size: 14px;
+  display: flex;
+  gap: 10px;
+  padding-top: 10px;
+
+  .phone {
+    border-left: 1px solid var(--bg-light);
+    padding-left: 10px;
+  }
 }
 
 .whatsapp-button {

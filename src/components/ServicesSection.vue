@@ -119,6 +119,8 @@ onBeforeUnmount(() => stopAutoplay())
             Da criação de identidade ao material impresso e sinalização, garantimos
             <span>qualidade, agilidade e resultados</span> que você pode ver.
           </p>
+
+          <p class="text-description">Atendemos toda Santa Vitória do Palmar e região do Chuí.</p>
         </div>
 
         <a href="#contato" class="cta-button"> Quero um orçamento sem compromisso </a>

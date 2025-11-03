@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import instagramIcon from '@/assets/icons/instagram.svg'
-import tiktokIcon from '@/assets/icons/tiktok.svg'
+import whatsappIcon from '@/assets/icons/whatsapp.svg'
 import facebookIcon from '@/assets/icons/facebook.svg'
 
 const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT
@@ -9,7 +9,7 @@ const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT
 // redes sociais
 const socialLinks = [
   { icon: instagramIcon, alt: 'Instagram', url: 'https://www.instagram.com/inkartdesign' },
-  { icon: tiktokIcon, alt: 'TikTok', url: 'https://www.tiktok.com/@innkartdesign' },
+  { icon: whatsappIcon, alt: 'Whatsapp', url: 'https://wa.me/5553999722323' },
   { icon: facebookIcon, alt: 'Facebook', url: 'https://www.facebook.com/innkart' },
 ]
 

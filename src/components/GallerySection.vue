@@ -127,7 +127,7 @@ const updatePosition = (useTransition = true) => {
               class="carousel-item"
               :class="{ active: index === activeIndex }"
             >
-              <img :src="image" alt="Projeto InkArt" />
+              <img :src="image" alt="Projeto InkArt" loading="lazy" />
             </div>
           </div>
         </div>

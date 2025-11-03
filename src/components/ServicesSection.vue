@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-// Import das imagens
 import adesivos from '@/assets/images/adesivos.jpg'
 import cartoes from '@/assets/images/cartoes.jpeg'
 import fachadas from '@/assets/images/fachadas.jpeg'
-import impressao from '@/assets/images/impressao.jpg'
+import impressao from '@/assets/images/impressao-inkart-santa-vitoria-do-palmar.jpg'
+import corteLaser from '@/assets/images/placas-mdf-corte-laser-inkart.jpg'
+import veiculos from '@/assets/images/personalizacao-veiculos-inkart-santa-vitoria-do-palmar.jpg'
+import neon from '@/assets/images/placas-neon-inkart-svp.jpg'
 
-// Dados dos serviços
 const services = [
   {
     id: 1,
@@ -15,36 +16,62 @@ const services = [
     description:
       'Materiais premium e processos de ponta para resultados duradouros e de alta definição.',
     imageUrl: adesivos,
+    featured: true,
   },
   {
     id: 2,
+    title: 'Placas Neon Personalizadas',
+    description:
+      'Ilumine sua marca com estilo. Produzimos letreiros em neon LED modernos, duráveis e perfeitos para destacar seu espaço ou evento.',
+    imageUrl: neon,
+    featured: true,
+  },
+  {
+    id: 3,
     title: 'Cartões de Visita',
     description:
       'Produção com qualidade gráfica superior para causar impacto em cada primeiro contato.',
     imageUrl: cartoes,
+    featured: false,
   },
   {
-    id: 3,
+    id: 4,
     title: 'Sinalização Externa',
     description:
       'Placas, banners, totens e fachadas que garantem visibilidade e profissionalismo para o seu ponto comercial.',
     imageUrl: fachadas,
+    featured: false,
   },
   {
-    id: 4,
+    id: 5,
+    title: 'Placas MDF e Corte a Laser',
+    description:
+      'Criações exclusivas com corte a laser de alta precisão. Ideal para plaquinhas personalizadas, QR Codes Pix e sinalizações elegantes.',
+    imageUrl: corteLaser,
+    featured: true,
+  },
+  {
+    id: 6,
     title: 'Impressão de Materiais',
     description:
       'Cartões de visita, flyers, folders e catálogos com acabamento impecável e entrega rápida.',
     imageUrl: impressao,
+    featured: false,
+  },
+  {
+    id: 7,
+    title: 'Personalização de Veículos',
+    description:
+      'Transforme seu carro ou frota em uma vitrine móvel. Adesivagem e envelopamento profissional com acabamento impecável e durabilidade.',
+    imageUrl: veiculos,
+    featured: false,
   },
 ]
 
-// Estado
 const activeIndex = ref(0)
 const intervalId = ref<number | null>(null)
 const isPaused = ref(false)
 
-// Funções
 const goToSlide = (index: number) => {
   if (index >= 0 && index < services.length) activeIndex.value = index
 }
@@ -53,15 +80,13 @@ const nextSlide = () => {
   activeIndex.value = (activeIndex.value + 1) % services.length
 }
 
-// Inicia autoplay
 const startAutoplay = () => {
-  stopAutoplay() // Evita duplicação
+  stopAutoplay()
   intervalId.value = window.setInterval(() => {
     if (!isPaused.value) nextSlide()
-  }, 4000) // muda de slide a cada 4s
+  }, 10000)
 }
 
-// Para autoplay
 const stopAutoplay = () => {
   if (intervalId.value !== null) {
     clearInterval(intervalId.value)
@@ -69,7 +94,6 @@ const stopAutoplay = () => {
   }
 }
 
-// Hooks
 onMounted(() => startAutoplay())
 onBeforeUnmount(() => stopAutoplay())
 </script>
@@ -88,6 +112,36 @@ onBeforeUnmount(() => stopAutoplay())
           <div v-if="activeIndex === index" class="service-card">
             <h3 class="card-title">{{ service.title }}</h3>
             <p class="card-description">{{ service.description }}</p>
+            <div v-if="service.featured" class="featured-tag">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                  fill="#fff"
+                  fill-opacity="0"
+                  stroke="#fff"
+                  stroke-dasharray="64"
+                  stroke-dashoffset="64"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28l-5.29 3.28l1.49 -6.04l-4.76 -4.02l6.21 -0.46Z"
+                >
+                  <animate
+                    fill="freeze"
+                    attributeName="fill-opacity"
+                    begin="0.6s"
+                    dur="0.5s"
+                    values="0;1"
+                  />
+                  <animate
+                    fill="freeze"
+                    attributeName="stroke-dashoffset"
+                    dur="0.6s"
+                    values="64;0"
+                  />
+                </path>
+              </svg>
+              <span>Destaque InkArt</span>
+            </div>
           </div>
         </div>
 
@@ -183,7 +237,7 @@ onBeforeUnmount(() => stopAutoplay())
 /* === CARD DE SERVIÇO === */
 .service-card {
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 3rem;
   left: 1.5rem;
   background: var(--gradient-fresh);
   color: var(--color-text);
@@ -204,6 +258,30 @@ onBeforeUnmount(() => stopAutoplay())
   font-size: 0.9rem;
   line-height: 1.4;
   max-width: 240px;
+}
+
+/* === TAG DESTAQUE === */
+.featured-tag {
+  background: var(--gradient-ink);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px 16px 6px 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 186px;
+
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+  position: absolute;
+  left: 120px;
+  margin: 0 -40px 0 40px;
 }
 
 /* === PAGINAÇÃO === */
@@ -273,10 +351,10 @@ onBeforeUnmount(() => stopAutoplay())
   line-height: 28px;
   margin-bottom: 1rem;
   font-weight: 400;
+}
 
-  span {
-    font-weight: 600;
-  }
+.text-description span {
+  font-weight: 600;
 }
 
 .large-margin-bottom {
@@ -286,7 +364,7 @@ onBeforeUnmount(() => stopAutoplay())
 /* === BOTÃO CTA === */
 .cta-button {
   background: var(--gradient-fresh);
-  color: var(--color-white);
+  color: var(--color-text);
   padding: 0.9rem 1.75rem;
   border-radius: 50px;
   font-weight: 700;
@@ -300,28 +378,5 @@ onBeforeUnmount(() => stopAutoplay())
 
 .cta-button:hover {
   transform: scale(1.05);
-}
-
-@media (max-width: 960px) {
-  .services-section {
-    padding: 90px 10px;
-  }
-
-  .content-right {
-    padding: 0 20px;
-  }
-
-  .text-description {
-    font-size: 20px;
-    line-height: 25px;
-  }
-
-  .cta-button {
-    font-size: 16px;
-    padding: 0.9rem 10px;
-    min-width: 340px;
-    text-align: center;
-    margin-left: 10px;
-  }
 }
 </style>

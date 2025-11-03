@@ -7,7 +7,7 @@ import teamImage from '@/assets/images/inkart-team.png'
     <div class="about-container">
       <!-- Imagem -->
       <div class="about-image">
-        <img :src="teamImage" alt="Equipe InkArt" />
+        <img :src="teamImage" alt="Equipe InkArt" loading="lazy" />
       </div>
 
       <!-- Texto -->

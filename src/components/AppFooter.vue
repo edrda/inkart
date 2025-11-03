@@ -23,7 +23,7 @@
 footer {
   background: var(--color-blue);
   color: var(--bg-light);
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   height: 80px;
   display: flex;
@@ -33,7 +33,7 @@ footer {
   border-radius: 80px 80px 0 0;
 }
 .info {
-  font-size: 14px;
+  font-size: 13px;
   display: flex;
   gap: 10px;
   padding-top: 10px;

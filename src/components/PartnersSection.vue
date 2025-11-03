@@ -50,6 +50,10 @@ onBeforeUnmount(() => {
     cancelAnimationFrame(animationId)
   }
 })
+
+const getPartnerImageUrl = (partner: string) => {
+  return new URL(`/src/assets/images/partners/${partner}.png`, import.meta.url).href
+}
 </script>
 
 <template>
@@ -58,7 +62,7 @@ onBeforeUnmount(() => {
     <div class="partners-slider">
       <div class="logos-track" ref="trackRef">
         <div v-for="(partner, i) in duplicatedPartners" :key="i" class="partner-logo">
-          <img :src="`/src/assets/images/partners/${partner}.png`" :alt="partner" />
+          <img :src="getPartnerImageUrl(partner)" :alt="partner" loading="lazy" />
         </div>
       </div>
     </div>

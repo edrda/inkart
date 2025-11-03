@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import reviewsData from '@/data/reviews.json'
 
+const getIconUrl = (iconName: string) => {
+  return new URL(`/src/assets/icons/${iconName}.svg`, import.meta.url).href
+}
+
 const averageRating = (
   reviewsData.reduce((acc, r) => acc + r.rating, 0) / reviewsData.length
 ).toFixed(1)
@@ -8,7 +12,7 @@ const averageRating = (
 const getStarIcons = (rating: number) => {
   const stars = []
   for (let i = 1; i <= 5; i++) {
-    stars.push(i <= rating ? '/src/assets/icons/star.svg' : '/src/assets/icons/outline-star.svg')
+    stars.push(i <= rating ? getIconUrl('star') : getIconUrl('outline-star'))
   }
   return stars
 }
@@ -21,7 +25,7 @@ const getStarIcons = (rating: number) => {
 
       <div class="rating-summary">
         <span class="stars">
-          <img src="/src/assets/icons/star.svg" alt="star" class="star-icon" />
+          <img :src="getIconUrl('star')" alt="star" class="star-icon" />
           {{ averageRating }}/5
         </span>
         <span class="total">({{ reviewsData.length }} avaliações)</span>

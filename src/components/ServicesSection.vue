@@ -84,7 +84,7 @@ const startAutoplay = () => {
   stopAutoplay()
   intervalId.value = window.setInterval(() => {
     if (!isPaused.value) nextSlide()
-  }, 10000)
+  }, 2900)
 }
 
 const stopAutoplay = () => {

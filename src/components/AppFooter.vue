@@ -100,6 +100,20 @@ footer {
     border-radius: 40px 40px 0 0;
     position: relative;
     z-index: 2;
+    font-size: 14px;
+    height: 100px;
+  }
+
+  .info {
+    font-size: 10px;
+    padding: 10px 12px 0;
+    flex-direction: column;
+    gap: 5px;
+
+    .phone {
+      border: none;
+      padding-left: 0;
+    }
   }
 }
 </style>

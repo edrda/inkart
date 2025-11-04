@@ -174,7 +174,7 @@ const handleSubmit = async () => {
   background: var(--color-white);
   padding: 6rem 1rem 0;
   overflow: hidden;
-  background-image: url(/src/assets/images/form-bg.png);
+  background-image: url(/src/assets/images/form-bg.webp);
   background-position: left bottom;
   background-repeat: no-repeat;
   background-size: 320px auto;

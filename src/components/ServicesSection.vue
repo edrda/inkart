@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-import adesivos from '@/assets/images/adesivos-personalizados-inkart-santa-vitoria-do-palmar.jpeg'
-import cartoes from '@/assets/images/cartao-visita-inkart-santa-vitoria-do-palmar.jpeg'
-import fachadas from '@/assets/images/sinalizacao-externa-inkart-santa-vitoria-do-palmar.jpeg'
-import impressao from '@/assets/images/impressao-flyer-panfleto-inkart-santa-vitoria-do-palmar.jpeg'
-import corteLaser from '@/assets/images/placas-mdf-corte-laser-inkart.jpg'
-import veiculos from '@/assets/images/veiculos-personalizacao-inkart-santa-vitoria-do-palmar.jpeg'
-import neon from '@/assets/images/placas-neon-inkart-svp.jpg'
+import adesivos from '@/assets/images/adesivos-personalizados-inkart-santa-vitoria-do-palmar.webp'
+import cartoes from '@/assets/images/cartao-visita-inkart-santa-vitoria-do-palmar.webp'
+import fachadas from '@/assets/images/sinalizacao-externa-inkart-santa-vitoria-do-palmar.webp'
+import impressao from '@/assets/images/impressao-flyer-panfleto-inkart-santa-vitoria-do-palmar.webp'
+import corteLaser from '@/assets/images/placas-mdf-corte-laser-inkart.webp'
+import veiculos from '@/assets/images/veiculos-personalizacao-inkart-santa-vitoria-do-palmar.webp'
+import neon from '@/assets/images/placas-neon-svp-inkart.jpg'
 
 const services = [
   {

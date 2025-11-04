@@ -7,7 +7,7 @@ import fachadas from '@/assets/images/sinalizacao-externa-inkart-santa-vitoria-d
 import impressao from '@/assets/images/impressao-flyer-panfleto-inkart-santa-vitoria-do-palmar.webp'
 import corteLaser from '@/assets/images/placas-mdf-corte-laser-inkart.webp'
 import veiculos from '@/assets/images/veiculos-personalizacao-inkart-santa-vitoria-do-palmar.webp'
-import neon from '@/assets/images/placas-neon-svp-inkart.jpg'
+import neon from '@/assets/images/placas-neon-inkart-svp-service.jpg'
 
 const services = [
   {

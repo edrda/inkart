@@ -7,12 +7,28 @@ import arrowRight from '@/assets/icons/arrow-right.svg'
 
 // Imagens
 import projeto1 from '@/assets/images/projeto1.jpg'
-import projeto2 from '@/assets/images/projeto2.jpg'
-import projeto3 from '@/assets/images/projeto3.jpg'
+import projeto2 from '@/assets/images/personalizacao-veiculos-inkart-santa-vitoria-do-palmar-svp.jpeg'
+import projeto3 from '@/assets/images/cartao-visita-design-grafico-inkart-santa-vitoria-do-palmar.jpeg'
 import projeto4 from '@/assets/images/projeto4.jpg'
 import projeto5 from '@/assets/images/projeto5.jpg'
+import projeto6 from '@/assets/images/personalizacao-premios-inkart-santa-vitoria-do-palmar.jpeg'
+import projeto7 from '@/assets/images/flyer-panfleto-inkart-santa-vitoria-do-palmar.jpeg'
+import projeto8 from '@/assets/images/manta-de-ima-inkart-santa-vitoria-do-palmar.jpeg'
+import projeto9 from '@/assets/images/fachadas--inkart-santa-vitoria-do-palmar.jpeg'
+import projeto10 from '@/assets/images/placas-acm-inkart-santa-vitoria-do-palmar.jpeg'
 
-const galleryImages = [projeto1, projeto2, projeto3, projeto4, projeto5]
+const galleryImages = [
+  projeto1,
+  projeto2,
+  projeto3,
+  projeto4,
+  projeto5,
+  projeto6,
+  projeto7,
+  projeto8,
+  projeto9,
+  projeto10,
+]
 
 const duplicatedImages = [...galleryImages, ...galleryImages, ...galleryImages]
 const activeIndex = ref(galleryImages.length)

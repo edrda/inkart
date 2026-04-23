@@ -90,7 +90,7 @@ Arquivos criados em /public
 
 O projeto foi hospedado na Vercel, disponível em:
 
-https://inkart.vercel.app
+https://inkartdesign.vercel.app
 
 ---
 

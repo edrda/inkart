@@ -6,7 +6,7 @@ export default {
 
 <template>
   <footer>
-    <span>© 2025. InkArt. Todos os direitos reservados.</span>
+    <span>© 2026. InkArt. Todos os direitos reservados.</span>
     <div class="info">
       <span>Rua Mário Teixeira de Melo, 759 - Santa Vitória do Palmar</span>
       <span class="phone">Telefone/Whatsapp: (53) 99972-2323</span>

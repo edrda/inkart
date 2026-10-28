@@ -12,7 +12,7 @@ O projeto foi construído para apresentar os serviços da empresa, seus diferenc
 - **Vite**
 - **SCSS / CSS nativo com variáveis globais**
 - **SwiperJS & animações customizadas**
-- **Formspree** (integração com formulário)
+- **WhatsApp** (contato pelo formulário)
 - **Imagens otimizadas e SVGs**
 - **Boas práticas de SEO (Santa Vitória do Palmar / Chuí)**
 
@@ -51,12 +51,12 @@ src/
 
 ## 💬 Formulário de Contato
 
-O formulário está integrado ao Formspree e inclui:
+O formulário prepara uma mensagem personalizada para envio pelo WhatsApp e inclui:
 
 - Validação de campos obrigatórios
 - Máscara de telefone
 - Validação básica de e-mail
-- Feedback visual para o usuário (mensagem de sucesso/erro)
+- Feedback visual e validação antes de abrir o WhatsApp
 
 ---
 

@@ -4,7 +4,12 @@ import instagramIcon from '@/assets/icons/instagram.svg'
 import whatsappIcon from '@/assets/icons/whatsapp.svg'
 import facebookIcon from '@/assets/icons/facebook.svg'
 
-const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT
+const whatsappNumber = '5553999722323'
+const subjectLabels: Record<string, string> = {
+  orcamento: 'Solicitar Orçamento',
+  duvida: 'Dúvida sobre um serviço',
+  outros: 'Outros',
+}
 
 // redes sociais
 const socialLinks = [
@@ -22,8 +27,6 @@ const form = ref({
   message: '',
 })
 
-const isSubmitting = ref(false)
-const successMessage = ref('')
 const errorMessage = ref('')
 
 // --- validação simples de email ---
@@ -44,41 +47,32 @@ const applyPhoneMask = (value: string) => {
   return value
 }
 
-const handleSubmit = async () => {
-  successMessage.value = ''
+const handleSubmit = () => {
   errorMessage.value = ''
 
-  if (!form.value.name || !form.value.email || !form.value.subject) {
+  if (!form.value.name.trim() || !form.value.email.trim() || !form.value.subject) {
     errorMessage.value = 'Por favor, preencha todos os campos obrigatórios.'
     return
   }
 
-  if (!isValidEmail(form.value.email)) {
+  if (!isValidEmail(form.value.email.trim())) {
     errorMessage.value = 'Digite um e-mail válido.'
     return
   }
 
-  isSubmitting.value = true
+  const message = [
+    'Novo contato pelo site da InkArt',
+    '',
+    `Nome: ${form.value.name.trim()}`,
+    `E-mail: ${form.value.email.trim()}`,
+    `Telefone/WhatsApp: ${form.value.phone.trim() || 'Não informado'}`,
+    `Assunto: ${subjectLabels[form.value.subject]}`,
+    '',
+    'Mensagem:',
+    form.value.message.trim() || 'Não informada',
+  ].join('\n')
 
-  try {
-    const response = await fetch(formspreeEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form.value),
-    })
-
-    if (response.ok) {
-      successMessage.value = 'Mensagem enviada com sucesso! 🚀'
-      form.value = { name: '', email: '', phone: '', subject: '', message: '' }
-    } else {
-      throw new Error('Erro ao enviar o formulário.')
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
-    errorMessage.value = 'Ocorreu um erro ao enviar. Tente novamente mais tarde.'
-  } finally {
-    isSubmitting.value = false
-  }
+  window.location.assign(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`)
 }
 </script>
 
@@ -116,7 +110,7 @@ const handleSubmit = async () => {
         <form class="contact-form" @submit.prevent="handleSubmit">
           <div class="form-group">
             <label for="name">Seu nome *</label>
-            <input v-model="form.name" type="text" id="name" required />
+            <input v-model="form.name" type="text" id="name" placeholder="Insira seu nome" required />
           </div>
 
           <div class="form-group">
@@ -153,15 +147,15 @@ const handleSubmit = async () => {
 
           <div class="form-group">
             <label for="message">Mensagem</label>
-            <textarea v-model="form.message" id="message" rows="5"></textarea>
+            <textarea v-model="form.message" id="message" placeholder="Descreva seu projeto ou dúvida" rows="5"></textarea>
           </div>
 
           <p v-if="errorMessage" class="form-feedback error">{{ errorMessage }}</p>
-          <p v-if="successMessage" class="form-feedback success">{{ successMessage }}</p>
+          <p class="form-feedback" aria-live="polite">
+            Ao continuar, o WhatsApp será aberto para você revisar e enviar a mensagem.
+          </p>
 
-          <button type="submit" class="submit-button" :disabled="isSubmitting">
-            {{ isSubmitting ? 'Enviando...' : 'ENVIAR' }}
-          </button>
+          <button type="submit" class="submit-button">SOLICITAR ORÇAMENTO</button>
         </form>
       </div>
     </div>
@@ -301,17 +295,14 @@ textarea {
 
 /* === FEEDBACK === */
 .form-feedback {
-  font-size: 0.9rem;
+  font-size: 12px;
   font-weight: 600;
   text-align: center;
+  color: var(--color-white);
 }
 .form-feedback.error {
   color: #ff4d4f;
 }
-.form-feedback.success {
-  color: #00ffae;
-}
-
 /* === BOTÃO === */
 .submit-button {
   background: transparent;
